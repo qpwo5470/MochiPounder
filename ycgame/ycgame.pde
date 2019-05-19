@@ -1,10 +1,14 @@
 PImage img;
+ArrayList<Hammer>hammers=new ArrayList<Hammer>();
+PImage tempPounder;
 YC yc;
 int[] dir = {0, 0, 0, 0};
 
 void setup() {
-  size (800, 800);
-  img = loadImage("image/yc.png");
+  size (1920, 1080);
+  imageMode(CENTER);
+  img = loadImage("yc.png");
+  tempPounder=loadImage("hammer.png");
   yc = new YC(img, img);
 }
 
@@ -12,7 +16,15 @@ void draw() {
   background(255);
   yc.move();
   yc.display();
-  println(dir);
+  for(int i=0;i<hammers.size();i++){
+    Hammer part=hammers.get(i);
+    part.display();
+    part.move();
+  }
+}
+
+void mousePressed(){
+  hammers.add(new Hammer(tempPounder,yc.getPosX(),yc.getPosY(),mouseX,mouseY));
 }
 
 void keyPressed() {
