@@ -1,7 +1,9 @@
 class YC {
   int hp = 3;
   int direction = 0;
-  float size = 100;
+  float sizeX = 76;
+  float sizeY = 134;
+  float constrainGap = 5;
   float speed = 10;
   float posX = 450;
   float posY = 450;
@@ -13,51 +15,48 @@ class YC {
     this.death = death;
   }
   void display() {
-    image(image, posX, posY, size, size*1.5);
+    image(image, posX, posY, sizeX, sizeY);
   }
   void move() {
-    if (posX > 0 + size && posX < 1920 - size && posY > 0 + size && posY < 1080 - size) {
-      switch (direction) {
-      case 1:
-        posX += speed;
-        break;
-      case 3:
-        posX += speed/sqrt(2);
-        posY += speed/sqrt(2);
-        break;
-      case 2:
-        posY += speed;
-        break;
-      case 6:
-        posX -= speed/sqrt(2);
-        posY += speed/sqrt(2);
-        break;
-      case 4: 
-        posX -= speed;
-        break;
-      case 12:
-        posX -= speed/sqrt(2);
-        posY -= speed/sqrt(2);
-        break;
-      case 8:
-        posY -= speed;
-        break;
-      case 9:
-        posX += speed/sqrt(2);
-        posY -= speed/sqrt(2);
-        break;
-      }
-    } else {
-      if (posX <= 0 + size) {
-        posX = 5 + size;
-      } else if (posX >= 1920 - size) {
-        posX = 1915 - size;
-      }
-      if (posY <= 0 + size*1.5) {
-        posY = 5 + size*1.5;
-      } else if (posY >= 1080 - size*1.5) {
-        posY = 1075 - size*1.5;
-      }
+    switch (direction) {
+    case 1:
+      posX += speed;
+      break;
+    case 3:
+      posX += speed/sqrt(2);
+      posY += speed/sqrt(2);
+      break;
+    case 2:
+      posY += speed;
+      break;
+    case 6:
+      posX -= speed/sqrt(2);
+      posY += speed/sqrt(2);
+      break;
+    case 4: 
+      posX -= speed;
+      break;
+    case 12:
+      posX -= speed/sqrt(2);
+      posY -= speed/sqrt(2);
+      break;
+    case 8:
+      posY -= speed;
+      break;
+    case 9:
+      posX += speed/sqrt(2);
+      posY -= speed/sqrt(2);
+      break;
+    }
+    if (posX <= 0 + sizeX/2) {
+      posX = constrainGap + sizeX/2;
+    } else if (posX >= width - sizeX/2) {
+      posX = width-constrainGap - sizeX/2;
+    }
+    if (posY <= 0 + sizeY/2) {
+      posY = constrainGap + sizeY/2;
+    } else if (posY >= height - sizeY/2) {
+      posY = height-constrainGap - sizeY/2;
     }
   }
   void setDirection(int dir) {
