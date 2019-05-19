@@ -1,4 +1,4 @@
-PImage img;
+PImage img1, img2;
 ArrayList<Hammer>hammers=new ArrayList<Hammer>();
 PImage tempPounder;
 YC yc;
@@ -7,9 +7,10 @@ int[] dir = {0, 0, 0, 0};
 void setup() {
   size (1920, 1080);
   imageMode(CENTER);
-  img = loadImage("yc.png");
+  img1 = loadImage("yc1.png");
+  img2 = loadImage("yc2.png");
   tempPounder=loadImage("hammer.png");
-  yc = new YC(img, img);
+  yc = new YC(img1, img2, img1);
 }
 
 void draw() {

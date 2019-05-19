@@ -1,20 +1,26 @@
 class YC {
   int hp = 3;
   int direction = 0;
-  float sizeX = 76;
-  float sizeY = 134;
+  float sizeX = 83;
+  float sizeY = 250;
   float constrainGap = 5;
   float speed = 10;
   float posX = 450;
   float posY = 450;
   PImage image;
+  PImage img1, img2;
   PImage death;
 
-  YC (PImage image, PImage death) {
-    this.image = image;
+  YC (PImage img1, PImage img2, PImage death) {
+    this.img1 = img1;
+    this.img2 = img2;
+    this.image = img1;
     this.death = death;
   }
   void display() {
+    if (direction >0) {
+      image = (int(millis()/150)%2 == 0)? img1:img2;
+    }
     image(image, posX, posY, sizeX, sizeY);
   }
   void move() {
