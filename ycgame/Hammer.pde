@@ -8,33 +8,33 @@ class Hammer {
   PImage pounder; 
   float rotAngle=0;
   //Constructor
-  Hammer(PImage pounder, float posX,float posY,float mouseX,float mouseY){
+  Hammer(PImage pounder, float posX, float posY, float mouseX, float mouseY) {
     this.pounder=pounder;
     this.posX=posX;
     this.posY=posY;
-    float d=dist(posX,posY,mouseX,mouseY);
+    float d=dist(posX, posY, mouseX, mouseY);
     float dx=mouseX-posX;
     float dy=mouseY-posY;
     speedX=(dx/d)*speed;
     speedY=(dy/d)*speed;
   } 
   //Methods (Functions)
-  void move(){
+  void move() {
     posX+=speedX;
     posY+=speedY;
     rotAngle+=0.5;
   }
-  void display(){
+  void display() {
     imageMode(CENTER);
     pushMatrix();
-    translate(posX,posY);
+    translate(posX, posY);
     rotate(rotAngle);
-    image(pounder,0,0,100,100);
+    image(pounder, 0, 0, 70, 70);
     popMatrix();
   }
   //Return
-  float[] getPos(){
-    float[] tempPos = {posX,posY};
+  float[] getPos() {
+    float[] tempPos = {posX, posY};
     return tempPos;
   }
 }
