@@ -56,13 +56,13 @@ class YC {
     }
     if (posX <= 0 + sizeX/2) {
       posX = constrainGap + sizeX/2;
-    } else if (posX >= width - sizeX/2) {
-      posX = width-constrainGap - sizeX/2;
+    } else if (posX >= 1920 - sizeX/2) {
+      posX = 1920-constrainGap - sizeX/2;
     }
     if (posY <= 0 + sizeY/2) {
       posY = constrainGap + sizeY/2;
-    } else if (posY >= height - sizeY/2) {
-      posY = height-constrainGap - sizeY/2;
+    } else if (posY >= 1080 - sizeY/2) {
+      posY = 1080-constrainGap - sizeY/2;
     }
   }
   void setDirection(int dir) {
