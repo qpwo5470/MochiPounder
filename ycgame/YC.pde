@@ -1,10 +1,10 @@
 class YC {
   int hp = 3;
   int direction = 0;
-  float sizeX = 83;
-  float sizeY = 250;
+  float sizeX = 43;
+  float sizeY = 130;
   float constrainGap = 5;
-  float speed = 10;
+  float speed = 4;
   float posX = 450;
   float posY = 450;
   PImage image;
