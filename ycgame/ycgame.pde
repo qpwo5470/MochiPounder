@@ -1,6 +1,7 @@
 //IMAGES
 PImage img1, img2;
 PImage tempPounder;
+PImage tempWall;
 PImage [] mochies = new PImage[4];
 
 //OBJECTS
@@ -21,6 +22,7 @@ void setup() {
   img2 = loadImage("yc2.png");
   tempPounder=loadImage("hammer.png");
   mochies[0] = loadImage("MOCHI_.png");
+  tempWall=loadImage("obstacle.png");
   yc = new YC(img1, img2, img1);
 }
 

@@ -1,0 +1,4 @@
+class NormMochi(){
+  PImage mochi;
+  
+}
