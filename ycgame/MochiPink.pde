@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 class MochiPink {
   float posX, posY;
   float centerX, centerY;
@@ -15,3 +16,5 @@ class MochiPink {
     this.spawnTime=millis();
   }
 }
+=======
+>>>>>>> 93a102e30e6861033cc07513033cf2939f4b96b4
