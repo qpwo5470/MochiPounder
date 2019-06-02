@@ -31,7 +31,10 @@ void setup() {
   img1 = loadImage("yc1.png");
   img2 = loadImage("yc2.png");
   tempPounder=loadImage("hammer.png");
-  mochies[0] = loadImage("MOCHI_.png");
+  mochies[0] = loadImage("MOCHI_PINK.png");
+  mochies[1] = loadImage("MOCHI_GREEN.png");
+  mochies[2] = loadImage("MOCHI_BLACK.png");
+  mochies[3] = loadImage("MOCHI_GOLD.png");
   tempWall=loadImage("obstacle.png");
   bgm = minim.loadFile("bgm.wav");
   slap = minim.loadFile("slap2.mp3");
@@ -72,6 +75,7 @@ void interaction() {
       float[] mochiPos = gaymochi.getPos();
       float distance = dist(mochiPos[0], mochiPos[1], hammerPos[0], hammerPos[1]);
       if (distance < hammer.getSize()+gaymochi.getSize()) {
+        slap.rewind();
         slap.play();
         hammer.pound();
         gaymochi.pound();
@@ -104,7 +108,20 @@ void autoSpawn() {
 }
 
 void spawn(int type) {
-  mochisgay.add(new Mochi(mochies[0]));
+  switch(type){
+    case 0:
+      mochisgay.add(new MochiPink(mochies[0]));
+      break;
+    case 1:
+      mochisgay.add(new MochiGreen(mochies[1]));
+      break;
+    case 2:
+      mochisgay.add(new MochiBlack(mochies[2]));
+      break;
+    case 3:
+      mochisgay.add(new MochiGold(mochies[3]));
+      break;
+  }
 }
 
 void mousePressed() {
