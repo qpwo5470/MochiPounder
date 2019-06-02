@@ -6,6 +6,9 @@ class Mochi {
   int size = 80;
   int actualSize = int(size*.25);
   PImage mochiImg;
+  float spawnTime;
+  float timeLimit;
+  int point;
   boolean live = true;
   boolean horizontal;
 
@@ -17,11 +20,17 @@ class Mochi {
     this.centerX = posX;
     this.centerY = posY;
     this.horizontal = int(random(2)) == 0;
+    this.timeLimit=random(12000,15000);
+    this.point=1;
+    this.spawnTime=millis();
   }
 
   void display() {
     imageMode(CENTER);
     image(mochiImg, posX, posY, size, size);
+    if(millis()-spawnTime>timeLimit){
+      live=false;
+    }
   }
 
   void move() {
@@ -53,5 +62,8 @@ class Mochi {
 
   int getSize() {
     return actualSize;
+  }
+  int getPoint(){
+    return point;
   }
 }
