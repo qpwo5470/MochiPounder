@@ -3,7 +3,7 @@ class Mochi {
   float posX, posY;
   float centerX, centerY;
   float speed = 5;
-  int size = 180;
+  int size = 80;
   int actualSize = int(size*.25);
   PImage mochiImg;
   boolean live = true;

@@ -5,7 +5,7 @@ class Hammer {
   float speedX;
   float speedY;
   float speed=15;
-  int size = 70;
+  int size = 35;
   PImage pounder; 
   float rotAngle=0;
   boolean unpound = true;
