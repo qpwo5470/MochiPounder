@@ -2,6 +2,7 @@ import ddf.minim.*;
 //SOUND
 Minim minim;
 AudioPlayer bgm;
+AudioPlayer slap;
 
 //IMAGES
 PImage background;
@@ -32,6 +33,7 @@ void setup() {
   mochies[0] = loadImage("MOCHI_.png");
   tempWall=loadImage("obstacle.png");
   bgm = minim.loadFile("bgm.wav");
+  slap = minim.loadFile("slap2.mp3");
   yc = new YC(img1, img2, img1);
   bgm.loop();
 }
@@ -69,6 +71,8 @@ void interaction() {
       float[] mochiPos = gaymochi.getPos();
       float distance = dist(mochiPos[0], mochiPos[1], hammerPos[0], hammerPos[1]);
       if (distance < hammer.getSize()+gaymochi.getSize()) {
+        slap.rewind();
+        slap.play();
         hammer.pound();
         gaymochi.pound();
       }
