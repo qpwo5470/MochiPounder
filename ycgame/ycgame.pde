@@ -1,4 +1,10 @@
+import ddf.minim.*;
+//SOUND
+Minim minim;
+AudioPlayer bgm;
+
 //IMAGES
+PImage background;
 PImage img1, img2;
 PImage tempPounder;
 PImage tempWall;
@@ -16,19 +22,23 @@ int spawnInterval = 5000;
 
 
 void setup() {
+  minim = new Minim(this);
   size (1920, 1080);
   imageMode(CENTER);
+  background = loadImage("mochi_background2.png");
   img1 = loadImage("yc1.png");
   img2 = loadImage("yc2.png");
   tempPounder=loadImage("hammer.png");
   mochies[0] = loadImage("MOCHI_.png");
   tempWall=loadImage("obstacle.png");
+  bgm = minim.loadFile("bgm.wav");
   yc = new YC(img1, img2, img1);
+  bgm.loop();
 }
 
 void draw() {
   scale(float(width)/1920.0);
-  background(255);
+  background(background);
   autoSpawn();
   yc.move();
   yc.display();
