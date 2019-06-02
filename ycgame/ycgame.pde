@@ -1,5 +1,6 @@
 import ddf.minim.*;
-//SOUND
+
+//Sound
 Minim minim;
 AudioPlayer bgm;
 AudioPlayer slap;
@@ -26,7 +27,7 @@ void setup() {
   minim = new Minim(this);
   size (1920, 1080);
   imageMode(CENTER);
-  background = loadImage("mochi_background2.png");
+  background = loadImage("mochibackground.png");
   img1 = loadImage("yc1.png");
   img2 = loadImage("yc2.png");
   tempPounder=loadImage("hammer.png");
@@ -71,7 +72,6 @@ void interaction() {
       float[] mochiPos = gaymochi.getPos();
       float distance = dist(mochiPos[0], mochiPos[1], hammerPos[0], hammerPos[1]);
       if (distance < hammer.getSize()+gaymochi.getSize()) {
-        slap.rewind();
         slap.play();
         hammer.pound();
         gaymochi.pound();
