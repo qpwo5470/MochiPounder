@@ -21,7 +21,9 @@ ArrayList<Mochi>mochisgay = new ArrayList<Mochi>();
 int[] dir = {0, 0, 0, 0};
 int lastSpawnTime = 0;
 int spawnInterval = 5000;
-
+int score=0;
+float time=180000;
+float clock=0;
 
 void setup() {
   minim = new Minim(this);
@@ -62,6 +64,16 @@ void draw() {
   }
 
   interaction();
+  
+  //GAME INTERFACE
+  textSize(40);
+  textAlign(LEFT,TOP);
+  fill(0);
+  noStroke();
+  text("POINTS:"+score,0,0);
+  textAlign(CENTER,TOP);
+  clock=millis();
+  text("TIME:"+nfc((time-clock)/1000,1),940,0);
 }
 
 void interaction() {
@@ -79,6 +91,7 @@ void interaction() {
         slap.play();
         hammer.pound();
         gaymochi.pound();
+        score+=gaymochi.getPoint();
       }
     }
   }
@@ -102,25 +115,35 @@ void interaction() {
 void autoSpawn() {
   if (millis()>lastSpawnTime+spawnInterval) {
     //spawn
-    spawn(0);
+    int type=int(random(100));
+    if (type<40) {
+      spawn(0);
+    } else if (type<70) {
+      spawn(1);
+    } else if (type<95) {
+      spawn(2);
+    } else {
+      spawn(3);
+    }
+
     lastSpawnTime = millis();
   }
 }
 
 void spawn(int type) {
-  switch(type){
-    case 0:
-      mochisgay.add(new MochiPink(mochies[0]));
-      break;
-    case 1:
-      mochisgay.add(new MochiGreen(mochies[1]));
-      break;
-    case 2:
-      mochisgay.add(new MochiBlack(mochies[2]));
-      break;
-    case 3:
-      mochisgay.add(new MochiGold(mochies[3]));
-      break;
+  switch(type) {
+  case 0:
+    mochisgay.add(new MochiPink(mochies[0]));
+    break;
+  case 1:
+    mochisgay.add(new MochiGreen(mochies[1]));
+    break;
+  case 2:
+    mochisgay.add(new MochiBlack(mochies[2]));
+    break;
+  case 3:
+    mochisgay.add(new MochiGold(mochies[3]));
+    break;
   }
 }
 

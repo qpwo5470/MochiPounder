@@ -12,8 +12,8 @@ class MochiGold extends Mochi {
     posX += speedX;
     posY += speedY;
     if (millis()-lastmoved > 1000) {
-      speedX = random(-10, 10);
-      speedY = random(-10, 10);
+      speedX = random(-20, 20);
+      speedY = random(-20, 20);
     }
   }
 }
