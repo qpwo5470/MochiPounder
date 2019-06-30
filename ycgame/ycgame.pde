@@ -27,13 +27,15 @@ int stage = 0;
 int[] dir = {0, 0, 0, 0};
 
 int lastSpawnTime = 0;
-int spawnInterval = 5000;
+int spawnInterval = 2000;
 
 int score = 0;
 int threshold = 25;
 
 float time = 1000;
 float clock = 0;
+
+int[] stageTime = {60, 45, 30, 100};
 
 boolean bossExist = false;
 
@@ -43,6 +45,9 @@ void setup() {
   imageMode(CENTER);
   rectMode(CENTER);
   background[0] = loadImage("background1.png");
+  background[1] = loadImage("background2.png");
+  background[2] = loadImage("background2.png");
+  background[3] = loadImage("background2.png");
   img1 = loadImage("yc1.png");
   img2 = loadImage("yc2.png");
   main = loadImage("main.png");
@@ -51,7 +56,7 @@ void setup() {
   mochies[1] = loadImage("MOCHI_GREEN.png");
   mochies[2] = loadImage("MOCHI_BLACK.png");
   mochies[3] = loadImage("MOCHI_GOLD.png");
-  mochies[4] = loadImage("MOCHI_GOLD.png");
+  mochies[4] = loadImage("giant_mochi.png");
   tempWall=loadImage("obstacle.png");
   gameover = loadImage("gameover.jpg");
   bgm = minim.loadFile("bgm.wav");
@@ -59,7 +64,6 @@ void setup() {
 }
 
 void draw() {
-  println(status);
   scale(float(width)/1920.0);
   switch(status) {
   case 0:  //Intro Vid
@@ -69,6 +73,7 @@ void draw() {
     background(main);
     noStroke();
     fill(255);
+    rectMode(CENTER);
     rect(width/2, 700, 600, 150);
     textSize(80);
     textAlign(CENTER, CENTER);
@@ -88,6 +93,7 @@ void draw() {
     image(gameover, width/2, height/2, width, height);
     noStroke();
     fill(0);
+    rectMode(CENTER);
     rect(width/2, height/2, 840, 200);
     textSize(140);
     textAlign(CENTER, CENTER);
@@ -132,11 +138,11 @@ void gameplay() {
   //Game Over
   if (clock >= time) {
     if (score >= threshold) {
-      if (stage < 4) {
+      if (stage < 3) {
         stage++;
         setStage(stage);
       } else {
-        status = 4;
+        status = 3;
       }
     } else {
       status = 3;
@@ -151,7 +157,7 @@ void setStage(int stageValue) {
   score = 0;
   clock = 0;
   threshold = 25 + stageValue*10;
-  time = 180000 - stageValue*20000;
+  time = stageTime[stageValue]*1000;
   time += millis();
 }
 
@@ -192,7 +198,7 @@ void interaction() {
 }
 
 void autoSpawn() {
-  if (stage < 4) {
+  if (stage < 3) {
     if (millis()>lastSpawnTime+spawnInterval) {
       //spawn
       int type=int(random(100));
@@ -211,6 +217,16 @@ void autoSpawn() {
     if (bossExist == false) {
       spawn(4);
       bossExist = true;
+    }
+    if (millis()>lastSpawnTime+spawnInterval) {
+      //spawn
+      int type=int(random(100));
+      if (type<75) {
+        spawn(2);
+      } else {
+        spawn(3);
+      }
+      lastSpawnTime = millis();
     }
   }
 }
