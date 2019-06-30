@@ -6,13 +6,14 @@ AudioPlayer bgm;
 AudioPlayer slap;
 
 //IMAGES
-PImage background;
+PImage [] background = new PImage[4];
 PImage img1, img2;
+;
 PImage tempPounder;
 PImage tempWall;
 PImage main;
 PImage gameover;
-PImage [] mochies = new PImage[4];
+PImage [] mochies = new PImage[5];
 
 //OBJECTS
 ArrayList<Hammer>hammers=new ArrayList<Hammer>();
@@ -34,12 +35,14 @@ int threshold = 25;
 float time = 1000;
 float clock = 0;
 
+boolean bossExist = false;
+
 void setup() {
   minim = new Minim(this);
   size (1920, 1080);
   imageMode(CENTER);
   rectMode(CENTER);
-  background = loadImage("mochibackground.png");
+  background[0] = loadImage("background1.png");
   img1 = loadImage("yc1.png");
   img2 = loadImage("yc2.png");
   main = loadImage("main.png");
@@ -48,6 +51,7 @@ void setup() {
   mochies[1] = loadImage("MOCHI_GREEN.png");
   mochies[2] = loadImage("MOCHI_BLACK.png");
   mochies[3] = loadImage("MOCHI_GOLD.png");
+  mochies[4] = loadImage("MOCHI_GOLD.png");
   tempWall=loadImage("obstacle.png");
   gameover = loadImage("gameover.jpg");
   bgm = minim.loadFile("bgm.wav");
@@ -73,7 +77,7 @@ void draw() {
 
     break;
   case 2:  //Gameplay
-    background(background);
+    background(background[stage]);
     gameplay();
     break;
   case 3:  //Game Over
@@ -125,12 +129,12 @@ void gameplay() {
   clock=millis();
   text("TIME:"+nfc((time-clock)/1000, 1), 940, 0);
 
-
   //Game Over
   if (clock >= time) {
     if (score >= threshold) {
       if (stage < 4) {
         stage++;
+        setStage(stage);
       } else {
         status = 4;
       }
@@ -188,20 +192,26 @@ void interaction() {
 }
 
 void autoSpawn() {
-  if (millis()>lastSpawnTime+spawnInterval) {
-    //spawn
-    int type=int(random(100));
-    if (type<40) {
-      spawn(0);
-    } else if (type<70) {
-      spawn(1);
-    } else if (type<95) {
-      spawn(2);
-    } else {
-      spawn(3);
+  if (stage < 4) {
+    if (millis()>lastSpawnTime+spawnInterval) {
+      //spawn
+      int type=int(random(100));
+      if (type<40) {
+        spawn(0);
+      } else if (type<70) {
+        spawn(1);
+      } else if (type<95) {
+        spawn(2);
+      } else {
+        spawn(3);
+      }
+      lastSpawnTime = millis();
     }
-
-    lastSpawnTime = millis();
+  } else {
+    if (bossExist == false) {
+      spawn(4);
+      bossExist = true;
+    }
   }
 }
 
@@ -218,6 +228,9 @@ void spawn(int type) {
     break;
   case 3:
     mochisgay.add(new MochiGold(mochies[3]));
+    break;
+  case 4:
+    mochisgay.add(new MochiBoss(mochies[4], mochies[2], mochisgay));
     break;
   }
 }
