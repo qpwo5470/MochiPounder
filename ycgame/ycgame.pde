@@ -30,7 +30,7 @@ YC yc;
 ArrayList<Mochi>mochisgay = new ArrayList<Mochi>();
 
 //VARIABLES
-int status = 1;
+int status = 0;
 int stage = 0;
 
 int[] dir = {0, 0, 0, 0};
@@ -291,8 +291,8 @@ void mousePressed() {
 
     break;
   case 1:  //Main Screen
-    rect(width/2, 700, 600, 150);
-    if (width/2-300<=mouseX && mouseX<=width/2+300 && 625<=mouseY && mouseY<=775) {
+    rect(1600, 700, 600, 150);
+    if (1600-300<=mouseX && mouseX<=1600+300 && 625<=mouseY && mouseY<=775) {
       setStage(stage);
       status = 2;
       bgm.loop();
