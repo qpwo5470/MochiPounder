@@ -29,7 +29,7 @@ int stage = 0;
 int[] dir = {0, 0, 0, 0};
 
 int lastSpawnTime = 0;
-int spawnInterval = 2000;
+int spawnInterval = 750;
 
 int score = 0;
 int threshold = 25;
