@@ -291,7 +291,6 @@ void mousePressed() {
 
     break;
   case 1:  //Main Screen
-    rect(1600, 700, 600, 150);
     if (1600-300<=mouseX && mouseX<=1600+300 && 625<=mouseY && mouseY<=775) {
       setStage(stage);
       status = 2;
