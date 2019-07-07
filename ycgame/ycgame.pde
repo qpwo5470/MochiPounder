@@ -1,3 +1,4 @@
+import processing.video.*;
 import ddf.minim.*;
 
 //Sound
@@ -15,6 +16,10 @@ PImage main;
 PImage gameover;
 PImage [] mochies = new PImage[5];
 PImage logo;
+PImage storymode;
+
+//VIDEOS
+Movie intro;
 
 
 //OBJECTS
@@ -23,7 +28,7 @@ YC yc;
 ArrayList<Mochi>mochisgay = new ArrayList<Mochi>();
 
 //VARIABLES
-int status = 1;
+int status = 0;
 int stage = 0;
 
 int[] dir = {0, 0, 0, 0};
@@ -51,10 +56,13 @@ void setup() {
   size (1920, 1080);
   imageMode(CENTER);
   rectMode(CENTER);
+  intro = new Movie(this, "intro.mp4");
+  logo = loadImage("epicgamers.png");
+  storymode = loadImage("storymode.png");
   logo = loadImage("epicgamers.png");
   background[0] = loadImage("background1.png");
   background[1] = loadImage("background2.png");
-  background[2] = loadImage("background2.png");
+  background[2] = loadImage("background3.png");
   background[3] = loadImage("background2.png");
   img1 = loadImage("yc1.png");
   img2 = loadImage("yc2.png");
@@ -69,25 +77,22 @@ void setup() {
   gameover = loadImage("gameover.jpg");
   bgm = minim.loadFile("bgm.mp3");
   slap = minim.loadFile("slap2.mp3");
+  intro.play();
 }
 
 void draw() {
   scale(float(width)/1920.0);
   switch(status) {
   case 0:  //Intro Vid
-
+    image(intro, width/2, height/2, width, height);
+    if (intro.duration() - intro.time() <= 0.5) {
+      status++;
+    }
     break;
   case 1:  //Main Screen
     background(main);
     image(logo, 1750, 120, 200, 200);
-    noStroke();
-    fill(255);
-    rectMode(CENTER);
-    rect(width/2, 700, 600, 150);
-    textSize(80);
-    textAlign(CENTER, CENTER);
-    fill(0);
-    text("Story Mode", width/2, 690);
+    image(storymode, width/2, 700, 600, 150);
 
     break;
   case 2:  //Gameplay
@@ -287,8 +292,8 @@ void mousePressed() {
 
 void keyPressed() {
   text = text.substring(1) + key;
-  
-  if(text.equals(scoreCode) || text.equals(scoreCode2)){
+
+  if (text.equals(scoreCode) || text.equals(scoreCode2)) {
     score += 10;
   }
   switch(status) {
