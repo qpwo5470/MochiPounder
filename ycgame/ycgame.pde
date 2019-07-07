@@ -14,6 +14,8 @@ PImage tempWall;
 PImage main;
 PImage gameover;
 PImage [] mochies = new PImage[5];
+PImage logo;
+
 
 //OBJECTS
 ArrayList<Hammer>hammers=new ArrayList<Hammer>();
@@ -44,6 +46,7 @@ void setup() {
   size (1920, 1080);
   imageMode(CENTER);
   rectMode(CENTER);
+  logo = loadImage("epicgamers.png");
   background[0] = loadImage("background1.png");
   background[1] = loadImage("background2.png");
   background[2] = loadImage("background2.png");
@@ -59,7 +62,7 @@ void setup() {
   mochies[4] = loadImage("giant_mochi.png");
   tempWall=loadImage("obstacle.png");
   gameover = loadImage("gameover.jpg");
-  bgm = minim.loadFile("bgm.wav");
+  bgm = minim.loadFile("bgm.mp3");
   slap = minim.loadFile("slap2.mp3");
 }
 
@@ -71,6 +74,7 @@ void draw() {
     break;
   case 1:  //Main Screen
     background(main);
+    image(logo, 1750, 120, 200, 200);
     noStroke();
     fill(255);
     rectMode(CENTER);
