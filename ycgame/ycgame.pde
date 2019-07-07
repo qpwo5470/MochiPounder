@@ -41,6 +41,11 @@ int[] stageTime = {60, 45, 30, 100};
 
 boolean bossExist = false;
 
+//CHEAT
+String scoreCode = "wwssadad";
+String scoreCode2 = "WWSSADAD";
+String text = "wwwwwwww";
+
 void setup() {
   minim = new Minim(this);
   size (1920, 1080);
@@ -281,6 +286,11 @@ void mousePressed() {
 }
 
 void keyPressed() {
+  text = text.substring(1) + key;
+  
+  if(text.equals(scoreCode) || text.equals(scoreCode2)){
+    score += 10;
+  }
   switch(status) {
   case 0:  //Intro Vid
 
