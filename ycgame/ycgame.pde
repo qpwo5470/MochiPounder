@@ -145,11 +145,20 @@ void gameplay() {
   interaction();
 
   //GAME INTERFACE
-  textSize(40);
+  textSize(60);
+  for (int x = -3; x < 4; x++) {
+    for (int y = -3; y < 4; y++) {
+      textAlign(LEFT, TOP);
+      fill(255);
+      text("POINTS:"+score, 20+x, y);
+      textAlign(CENTER, TOP);
+      clock=millis();
+      text("TIME:"+nfc((time-clock)/1000, 1), 940+x, y);
+    }
+  }
   textAlign(LEFT, TOP);
   fill(0);
-  noStroke();
-  text("POINTS:"+score, 0, 0);
+  text("POINTS:"+score, 20, 0);
   textAlign(CENTER, TOP);
   clock=millis();
   text("TIME:"+nfc((time-clock)/1000, 1), 940, 0);
@@ -160,7 +169,7 @@ void gameplay() {
       if (stage < 3) {
         stage++;
         setStage(stage);
-      } else if (stage == 3){
+      } else if (stage == 3) {
         status = 4;
       } else {
         status = 3;
@@ -178,7 +187,7 @@ void setStage(int stageValue) {
   score = 0;
   clock = 0;
   threshold = 25 + stageValue*10;
-  if(stageValue == 3) threshold = 500;
+  if (stageValue == 3) threshold = 500;
   time = stageTime[stageValue]*1000;
   time += millis();
 }

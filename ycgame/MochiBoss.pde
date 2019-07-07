@@ -1,5 +1,5 @@
 class MochiBoss extends Mochi {
-  int lives = 100;
+  int lives = 80;
   int lastSpawnTime = 0;
   int spawnInterval = 1000;
   ArrayList<Mochi>mochisgay;
@@ -15,12 +15,12 @@ class MochiBoss extends Mochi {
     this.point = 1;
     this.mochisgay = mochisgay;
     blackMochi = black;
-    size = 400;
+    size = 600;
     timeLimit = 1000000;
   }
   void display() {
     imageMode(CENTER);
-    image(mochiImg, posX, posY, size, size);
+    image(mochiImg, posX, posY, size/3*2, size/3*2);
     if (millis()-spawnTime > timeLimit) {
       live = false;
     }
