@@ -20,6 +20,7 @@ PImage storymode;
 
 //VIDEOS
 Movie intro;
+Movie ending;
 
 
 //OBJECTS
@@ -57,6 +58,7 @@ void setup() {
   imageMode(CENTER);
   rectMode(CENTER);
   intro = new Movie(this, "intro.mp4");
+  ending = new Movie(this, "ending.mp4");
   logo = loadImage("epicgamers.png");
   storymode = loadImage("storymode.png");
   logo = loadImage("epicgamers.png");
@@ -115,7 +117,10 @@ void draw() {
     text("GAME OVER", width/2, height/2);
     break;
   case 4:  //Ending Credit
-
+    image(ending, width/2, height/2, width, height);
+    if (ending.duration() - ending.time() <= 0.5) {
+      status = 1;
+    }
     break;
   }
 }
@@ -155,6 +160,8 @@ void gameplay() {
       if (stage < 3) {
         stage++;
         setStage(stage);
+      } else if (stage == 3){
+        status = 4;
       } else {
         status = 3;
       }
@@ -171,6 +178,7 @@ void setStage(int stageValue) {
   score = 0;
   clock = 0;
   threshold = 25 + stageValue*10;
+  if(stageValue == 3) threshold = 500;
   time = stageTime[stageValue]*1000;
   time += millis();
 }
@@ -365,4 +373,8 @@ void keyReleased() {
 
     break;
   }
+}
+
+void movieEvent(Movie m) {
+  m.read();
 }

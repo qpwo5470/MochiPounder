@@ -58,7 +58,7 @@ class MochiBoss extends Mochi {
     lives --;
     if (lives < 1) {
       live = false;
-      this.point = 100;
+      this.point = 1000;
     }
   }
 }
