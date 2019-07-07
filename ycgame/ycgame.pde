@@ -17,6 +17,7 @@ PImage gameover;
 PImage [] mochies = new PImage[5];
 PImage logo;
 PImage storymode;
+PImage title;
 
 //VIDEOS
 Movie intro;
@@ -29,7 +30,7 @@ YC yc;
 ArrayList<Mochi>mochisgay = new ArrayList<Mochi>();
 
 //VARIABLES
-int status = 0;
+int status = 1;
 int stage = 0;
 
 int[] dir = {0, 0, 0, 0};
@@ -61,7 +62,7 @@ void setup() {
   ending = new Movie(this, "ending.mp4");
   logo = loadImage("epicgamers.png");
   storymode = loadImage("storymode.png");
-  logo = loadImage("epicgamers.png");
+  title = loadImage("title.png");
   background[0] = loadImage("background1.png");
   background[1] = loadImage("background2.png");
   background[2] = loadImage("background3.png");
@@ -94,7 +95,8 @@ void draw() {
   case 1:  //Main Screen
     background(main);
     image(logo, 1750, 120, 200, 200);
-    image(storymode, width/2, 700, 600, 150);
+    image(title, 1600, 280, 900, 300);
+    image(storymode, 1600, 700, 600, 150);
 
     break;
   case 2:  //Gameplay
@@ -170,6 +172,7 @@ void gameplay() {
         stage++;
         setStage(stage);
       } else if (stage == 3) {
+        ending.play();
         status = 4;
       } else {
         status = 3;
